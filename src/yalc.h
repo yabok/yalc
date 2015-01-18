@@ -8,10 +8,10 @@
  */
 
 #include <locale.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <wchar.h>
 
@@ -29,5 +29,5 @@ static const char *colors [] = {
 };
 
 void
-colorized_print (FILE * stream, enum plane p);
+colorized_print (FILE *stream, enum plane p);
 

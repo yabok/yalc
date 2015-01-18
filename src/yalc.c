@@ -17,11 +17,11 @@ main (void) {
 }
 
 void
-colorized_print (FILE * stream, enum plane p) {
+colorized_print (FILE *stream, enum plane p) {
 	wchar_t line [BUFFER_SIZE];
 
-	for (uint64_t i = 0; fgetws(line, BUFFER_SIZE, stream); i ++ ) {
-		for (uint64_t j = 0; j < wcslen(line); j ++ ) {
+	for (uint64_t i = 0; fgetws(line, BUFFER_SIZE, stream); i ++) {
+		for (uint64_t j = 0; j < wcslen(line); j ++) {
 			printf("\x1b[%d8;5;%sm%lc", p, colors[(j/3+i)%22], line[j]);
 		}
 	}
