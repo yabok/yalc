@@ -7,33 +7,25 @@
  * "LICENSE" file for the full license text.
  */
 
-#include <locale.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <wchar.h>
-
-#define BUFFER_SIZE 5000
-
-static const char *colors [] = {
-	"88", "124", "160", "196", "202", "208", "214", "184", "190",
-	"154", "118", "82", "76", "34", "30", "27", "93", "129", "165",
-	"128", "127", "125"
-};
+#include "yalc.h"
 
 int32_t
 main (void) {
 	setlocale(LC_ALL, "");
+	colorized_print(stdin, FOREGROUND);
+	return 0;
+}
+
+void
+colorized_print (FILE * stream, enum plane p) {
 	wchar_t line [BUFFER_SIZE];
 
-	for (uint64_t i = 0; fgetws(line, BUFFER_SIZE, stdin) != NULL; i ++ ) {
+	for (uint64_t i = 0; fgetws(line, BUFFER_SIZE, stream) != NULL; i ++ ) {
 		for (uint64_t j = 0; j < wcslen(line); j ++ ) {
-			printf("\x1b[38;5;%sm%lc", colors[(j/3+i)%22], line[j]);
+			printf("\x1b[%d8;5;%sm%lc", p, colors[(j/3+i)%22], line[j]);
 		}
 	}
 
 	printf("\x1b[0m");
-
-	return 0;
 }
+
