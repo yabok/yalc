@@ -1,5 +1,5 @@
 CC := clang
-CFLAGS += -std=c11 -O2 -fstack-protector-all -fpie -pie -Wl,-z,relro,-z,now -ggdb -Weverything
+CFLAGS += -std=c11 -O2 -fstack-protector-all -fpie -pie -Weverything -Wno-disabled-macro-expansion -Wl,-z,relro,-z,now -ggdb
 
 all: yalc
 

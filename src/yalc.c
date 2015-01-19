@@ -13,7 +13,7 @@ struct args {
 	enum plane p;
 };
 
-const char * argp_program_version = "yalc 0.0.1";
+const char * argp_program_version = "yalc 0.0.2";
 const char * argp_program_bug_address = "https://github.com/yabok/yalc/issues";
 static char * doc = "yalc -- a minimalistic lolcat clone in C";
 
@@ -22,13 +22,18 @@ parse_opt (int32_t, char *, struct argp_state *);
 
 int32_t
 main (int32_t argc, char * argv []) {
+	if ( argc <= 1 ) {
+		fprintf(stderr, "See `%s --help` for more information\n", argv[0]);
+	}
+
 	setlocale(LC_ALL, "");
 
 	struct argp_option os [] = {
-		{ 0,            0,   0, 0, "Options:",                      -1 },
-		{ "foreground", 'f', 0, 0, "Colorize foreground (default)", 0  },
-		{ "background", 'b', 0, 0, "Colorize background",           0  },
-		{ 0,            0,   0, 0, 0,                               0  }
+		{ 0,      0,   0,      0, "Options:",                      -1 },
+		{ "file", 'f', "FILE", 0, "Colorize file ('-' for stdin)", 0  },
+		{ "fg",   'F', 0,      0, "Colorize foreground (default)", 0  },
+		{ "bg",   'B', 0,      0, "Colorize background",           0  },
+		{ 0,      0,   0,      0, 0,                               0  }
     };
 
 	struct argp argp = { os, parse_opt, "", doc, NULL, NULL, 0 };
@@ -36,7 +41,6 @@ main (int32_t argc, char * argv []) {
 
 	argp_parse(&argp, argc, argv, 0, 0, &args);
 
-	colorized_print(stdin, args.p);
 	return 0;
 }
 
@@ -58,9 +62,21 @@ parse_opt (int32_t key, char * arg, struct argp_state * state) {
 	struct args * args = state->input;
 	switch ( key ) {
 		case 'f':
+			if ( strncmp(arg, "-", 2) != 0 ) {
+				FILE * file = fopen(arg, "r");
+				if ( file ) {
+					colorized_print(file, args->p);
+				} else {
+					fputs("Failed to open file correctly\n", stderr);
+				} fclose(file);
+			} else {
+				colorized_print(stdin, args->p);
+			} break;
+
+		case 'F':
 			args->p = FOREGROUND; break;
 
-		case 'b':
+		case 'B':
 			args->p = BACKGROUND; break;
 
 		default:
