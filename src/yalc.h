@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
+#include <argp.h>
 
 #define BUFFER_SIZE 5000
 
