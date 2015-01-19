@@ -34,7 +34,7 @@ main (int32_t argc, char * argv []) {
 		{ "fg",   'F', 0,      0, "Colorize foreground (default)", 0  },
 		{ "bg",   'B', 0,      0, "Colorize background",           0  },
 		{ 0,      0,   0,      0, 0,                               0  }
-    };
+	};
 
 	struct argp argp = { os, parse_opt, "", doc, NULL, NULL, 0 };
 	struct args args = { FOREGROUND };
