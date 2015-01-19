@@ -66,9 +66,10 @@ parse_opt (int32_t key, char * arg, struct argp_state * state) {
 				FILE * file = fopen(arg, "r");
 				if ( file ) {
 					colorized_print(file, args->p);
+					fclose(file);
 				} else {
 					fputs("Failed to open file correctly\n", stderr);
-				} fclose(file);
+				}
 			} else {
 				colorized_print(stdin, args->p);
 			} break;
