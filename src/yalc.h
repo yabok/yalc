@@ -18,9 +18,8 @@
 
 #define BUFFER_SIZE 5000
 
-enum plane {
-	FOREGROUND = 3,
-	BACKGROUND = 4
+struct args {
+	uint16_t fg: 1, bg: 1, scount: 14;
 };
 
 static const char *colors [] = {
@@ -30,5 +29,5 @@ static const char *colors [] = {
 };
 
 void
-colorized_print (FILE *stream, enum plane p);
+colorized_print (FILE *stream, struct args * a);
 
