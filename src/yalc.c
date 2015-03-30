@@ -20,7 +20,7 @@ int32_t
 main (int32_t argc, char * argv []) {
 	if ( argc <= 1 ) {
 		fprintf(stderr, "See `%s --help` for more information\n", argv[0]);
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	setlocale(LC_ALL, "");
@@ -42,8 +42,8 @@ main (int32_t argc, char * argv []) {
 
 	if ( !args.scount ) {
 		fputs("You must pass at least one stream to lol\n", stderr);
-		return 1;
-	} return 0;
+		return EXIT_FAILURE;
+	} return EXIT_SUCCESS;
 }
 
 void
@@ -98,6 +98,6 @@ parse_opt (int32_t key, char * arg, struct argp_state * state) {
 			return ARGP_ERR_UNKNOWN;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
