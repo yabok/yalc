@@ -9,9 +9,9 @@
 
 #include "yalc.h"
 
-const char * argp_program_version = "yalc 0.0.2";
+const char * argp_program_version = "yalc 0.0.3";
 const char * argp_program_bug_address = "https://github.com/yabok/yalc/issues";
-static char * doc = "yalc -- a minimalistic lolcat clone in C";
+static char * doc = "yalc -- a minimalist lolcat clone in C";
 
 static error_t
 parse_opt (int32_t, char *, struct argp_state *);
@@ -25,7 +25,7 @@ main (int32_t argc, char * argv []) {
 
 	setlocale(LC_ALL, "");
 
-	struct argp_option os [] = {
+	const struct argp_option os [] = {
 		{ 0,        0,   0,      0, "Options:",                      -1 },
 		{ "stream", 's', "FILE", 0, "Colorize file ('-' for stdin)", 0  },
 		{ "fg",     'f', 0,      0, "Colorize foreground (default)", 0  },
@@ -52,12 +52,12 @@ colorized_print (FILE * stream, struct args * a) {
 
 	for ( uint64_t i = 0; fgetws(line, BUFFER_SIZE, stream); i ++ ) {
 		for ( uint64_t j = 0; j < wcslen(line); j ++ ) {
-			printf("%s%s%s%s%s%s%lc", a->fg ? "\x1b[38;5;" : "",
+			printf("%s%s%s%s%s%s%lc", a->fg ? "\x1b[38;5;"       : "",
 									  a->fg ? colors[(j/3+i)%22] : "",
-									  a->fg ? "m" : "",
-									  a->bg ? "\x1b[48;5;" : "",
-									  a->bg ? colors[(j+i)%22] : "",
-									  a->bg ? "m" : "",
+									  a->fg ? "m"                : "",
+									  a->bg ? "\x1b[48;5;"       : "",
+									  a->bg ? colors[(j+i)%22]   : "",
+									  a->bg ? "m"                : "",
 									  line[j]);
 		}
 	}
@@ -70,7 +70,7 @@ parse_opt (int32_t key, char * arg, struct argp_state * state) {
 	struct args * args = state->input;
 	switch ( key ) {
 		case 's':
-			if ( strncmp(arg, "-", 2) != 0 ) {
+			if ( strncmp(arg, "-", 2) ) {
 				FILE * file = fopen(arg, "r");
 				if ( file ) {
 					colorized_print(file, args);
