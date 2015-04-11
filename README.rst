@@ -1,6 +1,15 @@
-======
- yalc
-======
+=====================
+ yalc |travis| |cov|
+=====================
+
+.. |travis| image:: https://img.shields.io/travis/yabok/yalc.svg?style=flat-square
+   :alt: Travis Build Status
+   :target: https://travis-ci.org/yabok/yasl
+
+.. |cov| image:: https://img.shields.io/coverity/scan/4810.svg?style=flat-square
+   :alt: Coverity Scan Status
+   :target: https://scan.coverity.com/projects/4810
+
 --------------------
  Yet another lolcat
 --------------------
