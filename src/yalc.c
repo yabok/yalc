@@ -11,7 +11,7 @@
 
 const char * argp_program_version = "yalc 0.0.3";
 const char * argp_program_bug_address = "https://github.com/yabok/yalc/issues";
-static char * doc = "yalc -- a minimalist lolcat clone in C";
+static const char doc [] = "yalc -- a minimalist lolcat clone in C";
 
 static error_t
 parse_opt (int32_t, char *, struct argp_state *);
