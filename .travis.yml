@@ -2,4 +2,19 @@ language: c
 compiler: clang
 
 script:
-    - make
+  - make
+
+env:
+  global:
+    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+    #   via the "travis encrypt" command using the project repo's public key
+    - secure: "K0eVGu9S6IS7iuOszCqTTFrIRru/RwFbtJfLkUYJ1gefF8bgu6WYlMfujrpdhoVM9GuxX1fJ5I6UN8hMzHRMaV3GSxUtif2Kyzz+3+SwVNyYvpg++Fxuk6eHO3PwabjdibcaiM+aRzDTXXev7bYcjpgqFl0PDUM9JxnFtaSregs="
+
+addons:
+  coverity_scan:
+    project:
+      name: "yabok/yalc"
+      description: "yet another lolcat"
+    notification_email: yalc@lists.kyriasis.com
+    build_command: "make"
+    branch_pattern: coverity_scan
