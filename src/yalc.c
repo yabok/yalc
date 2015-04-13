@@ -53,12 +53,12 @@ colorized_print (FILE * stream, struct args * a) {
 	for ( uint64_t i = 0; fgetws(line, BUFFER_SIZE, stream); i ++ ) {
 		for ( uint64_t j = 0; j < wcslen(line); j ++ ) {
 			printf("%s%s%s%s%s%s%lc", a->fg ? "\x1b[38;5;"       : "",
-									  a->fg ? colors[(j/3+i)%22] : "",
-									  a->fg ? "m"                : "",
-									  a->bg ? "\x1b[48;5;"       : "",
-									  a->bg ? colors[(j+i)%22]   : "",
-									  a->bg ? "m"                : "",
-									  line[j]);
+			                          a->fg ? colors[(j/3+i)%22] : "",
+			                          a->fg ? "m"                : "",
+			                          a->bg ? "\x1b[48;5;"       : "",
+			                          a->bg ? colors[(j+i)%22]   : "",
+			                          a->bg ? "m"                : "",
+			                          line[j]);
 		}
 	}
 
